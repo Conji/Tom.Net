@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Toml.Net
 {
     public class Toml
     {
         private string Location { get; set; }
-        private Dictionary<string, TomlKeyValuePair[]> _values; 
+        private readonly Dictionary<string, TomlKeyValuePair[]> _values; 
 
         public Toml(string location)
         {
             Location = location;
             _values = new Dictionary<string, TomlKeyValuePair[]>();
+            
         }
 
         public Toml() : this("config.toml")
@@ -22,6 +20,16 @@ namespace Toml.Net
             
         }
 
+        public Toml(string location, Dictionary<string, TomlKeyValuePair[]> values) : this(location)
+        {
+            _values = values;
+        }
 
+        public static Toml Open(string location)
+        {
+            
+        }
+
+        public TomlKeyValuePair[] this[string table] => _values[table];
     }
 }
